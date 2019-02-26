@@ -30,6 +30,7 @@ transporter.verify(function(error, success) {
 exports.notice = (comment) => {
     let SITE_NAME = process.env.SITE_NAME;
     let NICK = comment.get('nick');
+    console.log(`nick is:${NICK}`);
     let COMMENT = comment.get('comment');
     let POST_URL = process.env.SITE_URL + comment.get('url') + '#' + comment.get('objectId');
     let SITE_URL = process.env.SITE_URL;
@@ -57,9 +58,11 @@ exports.notice = (comment) => {
 }
 
 exports.send = (currentComment, parentComment)=> {
-    let PARENT_NICK = parentComment.get('nick');
+    let PARENT_NICK = parentComment.get('nick') || 'Anonymous';
+    console.log(`PARENT_NICK is:${PARENT_NICK}`);
     let SITE_NAME = process.env.SITE_NAME;
-    let NICK = currentComment.get('nick');
+    let NICK = currentComment.get('nick') || 'Anonymous';
+    console.log(`NICK is:${NICK}`);
     let COMMENT = currentComment.get('comment');
     let PARENT_COMMENT = parentComment.get('comment');
     let POST_URL = process.env.SITE_URL + currentComment.get('url') + '#' + currentComment.get('objectId');
